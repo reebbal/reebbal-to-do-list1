@@ -1,0 +1,177 @@
+<html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>to do list</title>
+</head>
+<body>
+    
+</body>
+</html>
+<head>
+    <style>
+        /* Add some CSS style to the elements */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white; /* Change the background color to white */
+        }
+        h1 {
+            color: rgb(91, 91, 91); /* Change the text color to green */
+            text-align: center;
+            font-size: 48px; /* Increase the font size */
+            /* Remove the text shadow */
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            background-color: rgb(255, 255, 255);
+            border: 1px solid black;
+            margin: 10px;
+            padding: 10px;
+            display: flex; /* Use flexbox to align the elements */
+            align-items: center; /* Align the elements vertically */
+            /* Remove the border radius */
+            /* Remove the box shadow */
+            font-size: 24px; /* Increase the font size */
+            cursor: pointer; /* Change the cursor to pointer */
+        }
+        li.done { /* Add a class for the done items */
+            background-color: rgb(128, 128, 128); /* Change the background color to green */
+            color: white; /* Change the text color to white */
+            text-decoration: line-through; /* Add a line through the text */
+        }
+        li.done .delete-button { /* Add a class for the delete button of the done items */
+            display: none; /* Hide the delete button */
+        }
+        input[type="text"] {
+            margin: 10px;
+            border-radius: 10px; /* Add some border radius */
+            font-size: 24px; /* Increase the font size */
+            width: 300px; /* Increase the width of the input */
+            height: 40px; /* Increase the height of the input */
+        }
+        button {
+            margin: 10px;
+            padding: 10px;
+            background-color: rgb(169, 169, 169);
+            color: rgb(0, 0, 0);
+            border: none;
+            border-radius: 10px; /* Keep the border radius */
+            font-size: 24px; /* Increase the font size */
+            width: 100px; /* Increase the width of the button */
+            height: 40px; /* Increase the height of the button */
+        }
+        .delete-button { /* Add a class for the delete button */
+            margin-left: auto; /* Push the button to the right */
+            background-color: white; /* Change the background color to white */
+            color: rgb(0, 0, 0); /* Change the text color to red */
+            border: none; /* Remove the border */
+            /* Remove the border radius */
+            width: 100px; /* Set the width of the button */
+            height: 40px; /* Set the height of the button */
+        }
+        .input-container { /* Add a class for the input container */
+            display: flex; /* Use flexbox to align the elements */
+            justify-content: center; /* Center the elements horizontally */
+            align-items: center; /* Center the elements vertically */
+        }
+        .icons {
+            position: fixed; /* Make the icons fixed */
+            bottom: 10px; /* Set the bottom margin */
+            left: 10px; /* Set the left margin */
+            display: flex; /* Use flexbox to align the icons */
+            align-items: center; /* Align the icons vertically */
+        }
+        .icons img {
+            margin-right: 10px; /* Add some space between the icons */
+            width: 24px; /* Make the icons smaller */
+            height: 24px; /* Make the icons smaller */
+        }
+        .icons img:hover {
+            filter: brightness(50%); /* Add some effect when hovered */
+        }
+    </style>
+</head>
+<body>
+    <h1>To Do List</h1>
+    <ul id="todo-list">
+        <li>Find a video Idea<button class="delete-button">Delete</button></li>
+        <li>Record the video!<button class="delete-button">Delete</button></li>
+        <li>Edit the video<button class="delete-button">Delete</button></li>
+        <li>Post it<button class="delete-button">Delete</button></li>
+    </ul>
+    <div class="input-container"> <!-- Add a div element for the input container -->
+        <input type="text" id="new-item" placeholder="Enter a new item">
+        <button id="add-button">Add</button>
+    </div>
+    <div class="icons"> <!-- Add a div element for the icons -->
+        <a href="https://www.youtube.com/channel/UCobh1m4aQFJhyAAuFXaJkmA" target="_blank"><img src="youtube-logo-icone-grise.png" alt="YouTube logo"></a> <!-- Add a link to YouTube with a photo -->
+        <a href="https://github.com/reebbal" target="_blank"><img src="icone-github-grise.png" alt="GitHub logo"></a> <!-- Add a link to GitHub with a photo -->
+        <a href="https://www.tiktok.com/@reebbal" target="_blank"><img src="logo-icone-tiktok-simbolo-gris.png" alt="TikTok logo"></a> <!-- Add a link to TikTok with a photo -->
+        <a href="https://www.instagram.com/reebbal/" target="_blank"><img src="instagram-icone-gris.png" alt="Instagram logo"></a> <!-- Add a link to Instagram with a photo -->
+    </div>
+    <script>
+        // Add some JavaScript to make the list interactive
+        // Get the elements from the document
+        var todoList = document.getElementById("todo-list");
+        var newItem = document.getElementById("new-item");
+        var addButton = document.getElementById("add-button");
+
+        // Define a function to add a new item to the list
+        function addItem() {
+            // Get the value of the input field
+            var itemText = newItem.value;
+            // Check if the input is not empty
+            if (itemText != "") {
+                // Create a new list item element
+                var listItem = document.createElement("li");
+                // Create a new delete button element
+                var deleteButton = document.createElement("button");
+                deleteButton.className = "delete-button";
+                deleteButton.textContent = "Delete";
+                // Append the item text and the delete button to the list item
+                listItem.appendChild(document.createTextNode(itemText));
+                listItem.appendChild(deleteButton);
+                // Append the list item to the list
+                todoList.appendChild(listItem);
+                // Clear the input field
+                newItem.value = "";
+            }
+        }
+
+        // Define a function to delete an item from the list
+        function deleteItem(event) {
+            // Get the element that triggered the event
+            var target = event.target;
+            // Check if the element is a delete button
+            if (target.className == "delete-button") {
+                // Get the parent element of the button, which is the list item
+                var listItem = target.parentElement;
+                // Remove the list item from the list
+                todoList.removeChild(listItem);
+            }
+        }
+
+        // Define a function to toggle an item from the list
+        function toggleItem(event) {
+            // Get the element that triggered the event
+            var target = event.target;
+            // Check if the element is a list item
+            if (target.tagName == "LI") {
+                // Toggle the done class on the list item
+                target.classList.toggle("done");
+            }
+        }
+
+        // Add an event listener to the button to call the addItem function when clicked
+        addButton.addEventListener("click", addItem);
+        // Add an event listener to the list to call the deleteItem function when clicked
+        todoList.addEventListener("click", deleteItem);
+        // Add an event listener to the list to call the toggleItem function when clicked
+        todoList.addEventListener("click", toggleItem);
+    </script>
+</body>
+</html>
